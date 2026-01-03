@@ -58,12 +58,12 @@ function Input(props) {
 }
 
 function GameSquare(props) {
-  if(props.val===0) {return <button class="square" 
+  if(props.val===0) {return <button className="square" 
     onClick={() => props.takeTurn(props.row, props.col)} disabled={props.done}/>
   } else {
     let imgSrc = props.val===1 ? xImg : oImg;
     let altTxt = props.val===1 ? "X Square" : "O Square"
-    return <div class="square"><img src={imgSrc} style={{width:'90%'}} alt={altTxt}/></div>
+    return <div className="square"><img src={imgSrc} style={{width:'90%'}} alt={altTxt}/></div>
 } }
 
 function ToRender() {
@@ -100,20 +100,25 @@ function ToRender() {
   }, [gameGrid, numTurns])
 
   return <>
-    <div class="column" style={{
+    <div className="corner">
+      <a href="https://captaincarp22.github.io">Return to home page</a><br/>
+      <span><i>Note: Anything changed on this page won't save after refreshing</i></span>
+    </div>
+
+    <div className="column" style={{
       backgroundColor: "rgb("+redVal+","+greVal+","+bluVal+")"}}>
       <Text txtColor={"rgb("+(255-redVal)+","+(255-greVal)+","+(255-bluVal)+")"}/>
       <Color colorName="Red" col={redVal} setCol={setRed}/>
       <Color colorName="Green" col={greVal} setCol={setGre}/>
       <Color colorName="Blue" col={bluVal} setCol={setBlu}/>
       <div style={{color:"rgb("+(255-redVal)+","+(255-greVal)+","+(255-bluVal)+")"}}>
-        <code class="large">Background Hex: #{to2DigitHex(redVal)+to2DigitHex(greVal)+to2DigitHex(bluVal)}</code>
-        <code class="large" style={{margin:0}}>
+        <code className="large">Background Hex: #{to2DigitHex(redVal)+to2DigitHex(greVal)+to2DigitHex(bluVal)}</code>
+        <code className="large" style={{margin:0}}>
           Text Hex Value: #{to2DigitHex(255-redVal)+to2DigitHex(255-greVal)+to2DigitHex(255-bluVal)}</code>
       </div>
     </div>
 
-    <div class="column" style={{backgroundColor:"lightblue"}}>
+    <div className="column" style={{backgroundColor:"lightblue"}}>
       <h1>Editable List of Things</h1>
       <button onClick={() => setList([...itemList, ""])} disabled={!listEditable} 
         style={{width:'100px', marginLeft:'8px'}}>Add Item</button>
@@ -126,13 +131,13 @@ function ToRender() {
       </form>
     </div>
     
-    <div class="column" style={{backgroundColor:"lightgreen"}}>
+    <div id="last" className="column" style={{backgroundColor:"lightgreen"}}>
       <h1>Play a Game of Tic-Tac-Toe!</h1>
       <div style={{width: '90%', margin: 'auto'}}>
         <p style={{fontSize:'28px', margin:'4px 0', textAlign:'center', fontFamily:'cursive'}}>
           <b>{gameOver ? "Game Over!" : (currTurn===1 ? "X's turn!" : "O's turn!")}</b></p>
         {gameGrid.map((arr, i) => arr.map((v, j) => 
-          <GameSquare val={v} row={i} col={j} takeTurn={takeTurn} done={gameOver}/>))}
+          <GameSquare key={i*3+j} val={v} row={i} col={j} takeTurn={takeTurn} done={gameOver}/>))}
         <button style={{marginTop:'10px', fontSize:'24px'}} 
           onClick={() => {setTurn(1); setNumTurns(0); setGameOver(false);
           setGameGrid([[0,0,0],[0,0,0],[0,0,0]]);}}>Reset Game</button>
