@@ -1,2 +1,0 @@
-*{box-sizing:border-box}#root,body,html{height:100%;margin:0}.square{align-items:center;aspect-ratio:1;background-color:initial;border:2px solid #000;display:flex;justify-content:center}.column,.square{float:left;width:33.3%}.column{height:100%;overflow:auto;padding:0 12px}@media screen and (max-width:800px){.column{height:auto;padding-bottom:30px;width:100%}}.large{display:block;font-size:28px;font-weight:700;margin:12px 0}
-/*# sourceMappingURL=main.4278a062.css.map*/
